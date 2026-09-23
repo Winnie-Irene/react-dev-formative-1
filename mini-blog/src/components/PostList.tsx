@@ -11,6 +11,9 @@ const samplePosts: PostType[] = [
     content:
       'TypeScript adds static typing to JavaScript, which catches bugs early and makes refactoring a lot less stressful. If you have ever spent hours debugging a typo in a variable name, TypeScript would have flagged that for you instantly. The developer experience boost alone makes it worth the learning curve, especially for larger codebases where things can get messy fast.',
     date: today,
+    tags: ['typescript', 'javascript', 'webdev'],
+    likes: 12,
+    bookmarks: 4,
   },
   {
     id: 2,
@@ -19,6 +22,9 @@ const samplePosts: PostType[] = [
     content:
       'Vite is a modern build tool that makes React development noticeably faster. Unlike older bundlers, Vite uses native ES modules in development, so your dev server starts almost instantly even on big projects. Hot Module Replacement is also lightning quick. If you are still using Create React App, switching to Vite is one of the easiest wins you can get.',
     date: '2026-09-18T10:30:00.000Z',
+    tags: ['vite', 'react', 'tooling'],
+    likes: 8,
+    bookmarks: 3,
   },
   {
     id: 3,
@@ -27,16 +33,18 @@ const samplePosts: PostType[] = [
     content:
       'Both approaches have their strengths. Plain CSS keeps things simple and familiar, while styled components let you colocate your styles with your logic and scope them automatically. For smaller projects, plain CSS works great. For anything with lots of dynamic styling or theming, styled components can save you from class name collisions and make your components more self contained.',
     date: '2026-09-15T08:00:00.000Z',
+    tags: ['css', 'styled-components', 'react'],
+    likes: 15,
+    bookmarks: 6,
   },
 ];
 
 const sectionHeadingStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-display)',
-  fontSize: '1.1rem',
+  fontSize: '0.95rem',
   fontWeight: 600,
   color: 'var(--color-text-muted)',
-  marginBottom: '24px',
-  letterSpacing: '0.3px',
+  marginBottom: '20px',
+  letterSpacing: '0.2px',
 };
 
 function PostList() {
