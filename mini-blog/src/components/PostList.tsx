@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Post as PostType } from '../utils/types';
 import Post from './Post';
 
@@ -39,21 +40,50 @@ const samplePosts: PostType[] = [
   },
 ];
 
-const sectionHeadingStyle: React.CSSProperties = {
-  fontSize: '0.95rem',
-  fontWeight: 600,
-  color: 'var(--color-text-muted)',
-  marginBottom: '20px',
-  letterSpacing: '0.2px',
-};
+const allTags = Array.from(new Set(samplePosts.flatMap((post) => post.tags)));
 
 function PostList() {
+  const [activeFilter, setActiveFilter] = useState<string>('all');
+
+  const filteredPosts =
+    activeFilter === 'all'
+      ? samplePosts
+      : samplePosts.filter((post) => post.tags.includes(activeFilter));
+
   return (
     <section>
-      <h3 style={sectionHeadingStyle}>Latest Posts</h3>
-      {samplePosts.map((post) => (
+      <div className="filter-row">
+        <div className="filter-bar">
+          <button
+            className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('all')}
+          >
+            All
+          </button>
+          {allTags.map((tag) => (
+            <button
+              key={tag}
+              className={`filter-btn ${activeFilter === tag ? 'active' : ''}`}
+              onClick={() => setActiveFilter(tag)}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+        <a href="#new-post" className="write-btn">
+          Write a Post
+        </a>
+      </div>
+
+      {filteredPosts.map((post) => (
         <Post key={post.id} post={post} highlightAuthor="Irene Winnie" />
       ))}
+
+      {filteredPosts.length === 0 && (
+        <p style={{ textAlign: 'center', color: 'var(--color-text-muted)', padding: '40px 0', fontSize: '0.9rem' }}>
+          No posts found for this tag.
+        </p>
+      )}
     </section>
   );
 }
